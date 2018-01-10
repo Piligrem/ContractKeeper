@@ -110,13 +110,6 @@ namespace ContractKeeper
         int DetachEntities<TEntity>(bool unchangedEntitiesOnly = true) where TEntity : class;
 
         /// <summary>
-        /// Detaches all entities matching the passed <paramref name="predicate"/> from the current object context
-        /// </summary>
-        /// <param name="unchangedEntitiesOnly">When <c>true</c>, only entities in unchanged state get detached.</param>
-        /// <returns>The count of detached entities</returns>
-        int DetachEntities(Func<object, bool> predicate, bool unchangedEntitiesOnly = true);
-
-        /// <summary>
         /// Change the state of an entity object
         /// </summary>
         /// <typeparam name="TEntity">Type of entity</typeparam>
@@ -137,8 +130,7 @@ namespace ContractKeeper
         /// </summary>
         /// <param name="isolationLevel">The database isolation level with which the underlying store transaction will be created</param>
         /// <returns>A transaction object wrapping access to the underlying store's transaction object</returns>
-        ITransaction BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.Unspecified);
-
+      
         /// <summary>
         /// Enables the user to pass in a database transaction created outside of the Database object if you want the Entity Framework to execute commands within that external transaction. Alternatively, pass in null to clear the framework's knowledge of that transaction.
         /// </summary>

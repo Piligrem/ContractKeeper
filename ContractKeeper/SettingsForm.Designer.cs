@@ -31,20 +31,23 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.DbConnectionString = new System.Windows.Forms.TextBox();
             this.SetConnectionString = new System.Windows.Forms.Button();
-            this.butSave = new System.Windows.Forms.Button();
-            this.butClose = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnCreateDB = new System.Windows.Forms.Button();
+            this.rbConnect = new System.Windows.Forms.RadioButton();
+            this.rbConnect2 = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // DbConnectionString
             // 
-            this.DbConnectionString.Location = new System.Drawing.Point(12, 15);
+            this.DbConnectionString.Location = new System.Drawing.Point(13, 87);
             this.DbConnectionString.Name = "DbConnectionString";
-            this.DbConnectionString.Size = new System.Drawing.Size(260, 20);
+            this.DbConnectionString.Size = new System.Drawing.Size(259, 20);
             this.DbConnectionString.TabIndex = 0;
             // 
             // SetConnectionString
             // 
-            this.SetConnectionString.Location = new System.Drawing.Point(278, 12);
+            this.SetConnectionString.Location = new System.Drawing.Point(278, 84);
             this.SetConnectionString.Name = "SetConnectionString";
             this.SetConnectionString.Size = new System.Drawing.Size(27, 23);
             this.SetConnectionString.TabIndex = 1;
@@ -52,36 +55,75 @@
             this.SetConnectionString.UseVisualStyleBackColor = true;
             this.SetConnectionString.Click += new System.EventHandler(this.SetConnectionString_Click);
             // 
-            // butSave
+            // btnSave
             // 
-            this.butSave.Location = new System.Drawing.Point(161, 41);
-            this.butSave.Name = "butSave";
-            this.butSave.Size = new System.Drawing.Size(69, 23);
-            this.butSave.TabIndex = 2;
-            this.butSave.Text = "Сохранить";
-            this.butSave.UseVisualStyleBackColor = true;
+            this.btnSave.Location = new System.Drawing.Point(161, 113);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(69, 23);
+            this.btnSave.TabIndex = 2;
+            this.btnSave.Text = "Сохранить";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.butSave_Click);
             // 
-            // butClose
+            // btnClose
             // 
-            this.butClose.Location = new System.Drawing.Point(236, 41);
-            this.butClose.Name = "butClose";
-            this.butClose.Size = new System.Drawing.Size(69, 23);
-            this.butClose.TabIndex = 3;
-            this.butClose.Text = "Закрыть";
-            this.butClose.UseVisualStyleBackColor = true;
+            this.btnClose.Location = new System.Drawing.Point(236, 113);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(69, 23);
+            this.btnClose.TabIndex = 3;
+            this.btnClose.Text = "Закрыть";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.butClose_Click);
             // 
-            // Settings
+            // btnCreateDB
+            // 
+            this.btnCreateDB.Location = new System.Drawing.Point(141, 33);
+            this.btnCreateDB.Name = "btnCreateDB";
+            this.btnCreateDB.Size = new System.Drawing.Size(164, 23);
+            this.btnCreateDB.TabIndex = 4;
+            this.btnCreateDB.Text = "Создать базу данных";
+            this.btnCreateDB.UseVisualStyleBackColor = true;
+            // 
+            // rbConnect
+            // 
+            this.rbConnect.AccessibleName = "";
+            this.rbConnect.AutoSize = true;
+            this.rbConnect.Location = new System.Drawing.Point(13, 13);
+            this.rbConnect.Name = "rbConnect";
+            this.rbConnect.Size = new System.Drawing.Size(133, 17);
+            this.rbConnect.TabIndex = 5;
+            this.rbConnect.TabStop = true;
+            this.rbConnect.Text = "Создать базу данных";
+            this.rbConnect.UseVisualStyleBackColor = true;
+            // 
+            // rbConnect2
+            // 
+            this.rbConnect2.AccessibleName = "";
+            this.rbConnect2.AutoSize = true;
+            this.rbConnect2.Location = new System.Drawing.Point(13, 61);
+            this.rbConnect2.Name = "rbConnect2";
+            this.rbConnect2.Size = new System.Drawing.Size(153, 17);
+            this.rbConnect2.TabIndex = 6;
+            this.rbConnect2.TabStop = true;
+            this.rbConnect2.Text = "Подключить базу данных";
+            this.rbConnect2.UseVisualStyleBackColor = true;
+            // 
+            // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(311, 71);
-            this.Controls.Add(this.butClose);
-            this.Controls.Add(this.butSave);
+            this.ClientSize = new System.Drawing.Size(311, 139);
+            this.Controls.Add(this.rbConnect2);
+            this.Controls.Add(this.rbConnect);
+            this.Controls.Add(this.btnCreateDB);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.SetConnectionString);
             this.Controls.Add(this.DbConnectionString);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Settings";
+            this.Name = "SettingsForm";
             this.Text = "Настройки";
+            this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.Shown += new System.EventHandler(this.Settings_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -92,7 +134,10 @@
 
         private System.Windows.Forms.TextBox DbConnectionString;
         private System.Windows.Forms.Button SetConnectionString;
-        private System.Windows.Forms.Button butSave;
-        private System.Windows.Forms.Button butClose;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnCreateDB;
+        private System.Windows.Forms.RadioButton rbConnect;
+        private System.Windows.Forms.RadioButton rbConnect2;
     }
 }

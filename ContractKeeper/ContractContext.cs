@@ -6,25 +6,21 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
+using System.Configuration;
 using System.Linq;
 
 namespace ContractKeeper
 {
     public class ContractContext : DbContext, IDbContext
     {
-        protected ContractContext()
-			: this(GetConnectionString())
+        public ContractContext()
+			: base(GetConnectionString())
 		{
         }
 
         public static string GetConnectionString()
         {
-            if (DataSettings.Current.IsValid())
-            {
-                return DataSettings.Current.DataConnectionString;
-            }
-
-            throw new Exception("A connection string could not be resolved for the parameterless constructor of the derived DbContext. Either the database is not installed, or the file 'Settings.txt' does not exist or contains invalid content.");
+            return ConfigurationManager.ConnectionStrings["DbConnect"].ConnectionString;        
         }
 
         public string Alias { get; internal set; }
@@ -109,38 +105,11 @@ namespace ContractKeeper
             return alreadyAttached;
         }
 
-        public ITransaction BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.Unspecified)
-        {
-            var dbContextTransaction = this.Database.BeginTransaction(isolationLevel);
-            return new DbContextTransactionWrapper(dbContextTransaction);
-        }
 
         public void ChangeState<TEntity>(TEntity entity, EntityState newState) where TEntity : BaseEntity
         {
             this.Entry(entity).State = newState;
         }
-
-        public int DetachEntities(Func<object, bool> predicate, bool unchangedEntitiesOnly = true)
-        {
-            Guard.NotNull(predicate, nameof(predicate));
-
-            Func<DbEntityEntry, bool> predicate2 = x =>
-            {
-                if (x.State > System.Data.Entity.EntityState.Detached && predicate(x.Entity))
-                {
-                    return unchangedEntitiesOnly
-                        ? x.State == System.Data.Entity.EntityState.Unchanged
-                        : true;
-                }
-
-                return false;
-            };
-
-            var attachedEntities = this.ChangeTracker.Entries().Where(predicate2).ToList();
-            attachedEntities.Each(entry => entry.State = System.Data.Entity.EntityState.Detached);
-            return attachedEntities.Count;
-        }
-
         public int DetachEntities<TEntity>(bool unchangedEntitiesOnly = true) where TEntity : class
         {
             throw new NotImplementedException();
@@ -195,36 +164,7 @@ namespace ContractKeeper
         {
             throw new NotImplementedException();
         }
-        #region Nested classes
 
-        private class DbContextTransactionWrapper : ITransaction
-        {
-            private readonly DbContextTransaction _tx;
-
-            public DbContextTransactionWrapper(DbContextTransaction tx)
-            {
-                if (tx == null)
-                    throw new ArgumentNullException(nameof(tx));
-                _tx = tx;
-            }
-
-            public void Commit()
-            {
-                _tx.Commit();
-            }
-
-            public void Rollback()
-            {
-                _tx.Rollback();
-            }
-
-            public void Dispose()
-            {
-                _tx.Dispose();
-            }
-        }
-
-        #endregion
     }
 
 }

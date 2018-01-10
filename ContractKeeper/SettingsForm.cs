@@ -17,11 +17,30 @@ namespace ContractKeeper
         public SettingsForm()
         {
             InitializeComponent();
+            rbConnect.Click += RbConnect_Click;
+            rbConnect2.Click += RbConnect2_Click;
+            btnCreateDB.Click += BtnCreateDB_Click;
+        }
+
+        private void BtnCreateDB_Click(object sender, EventArgs e)
+        {
+            CreateDBForm createDBForm = new CreateDBForm();
+            createDBForm.ShowDialog();
+        }
+
+        private void RbConnect2_Click(object sender, EventArgs e)
+        {
+            ActivateChooseBD();
+        }
+
+        private void RbConnect_Click(object sender, EventArgs e)
+        {
+            ActivateCreateBD();
         }
 
         private void Settings_Shown(object sender, EventArgs e)
         {
-            DbConnectionString.Text =  ConfigurationManager.ConnectionStrings["DbConnect"].ConnectionString;
+            DbConnectionString.Text = ContractContext.GetConnectionString();
         }
 
         private void SetConnectionString_Click(object sender, EventArgs e)
@@ -39,6 +58,56 @@ namespace ContractKeeper
                 connectionString = dcd.ConnectionString;
             dcs.SaveConfiguration(dcd);
             return connectionString;
+        }
+
+        private void butSave_Click(object sender, EventArgs e)
+        {
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            
+            var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
+            if (connectionStringsSection == null)
+            {
+
+            }
+            connectionStringsSection.ConnectionStrings["DbConnect"].ConnectionString = DbConnectionString.Text;
+            config.Save();
+            ConfigurationManager.RefreshSection("connectionStrings");
+            Close();
+        }
+
+        private void butClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+        
+        private void ActivateCreateBD()
+        {
+            btnCreateDB.Enabled = true;
+
+            btnSave.Enabled = false;
+            DbConnectionString.Enabled = false;
+            SetConnectionString.Enabled = false;
+        }
+
+        private void ActivateChooseBD()
+        {
+            btnCreateDB.Enabled = false;
+
+            btnSave.Enabled = true;
+            DbConnectionString.Enabled = true;
+            SetConnectionString.Enabled = true;
+        }
+        private void SettingsForm_Load(object sender, EventArgs e)
+        {
+            rbConnect.Checked = true;
+            if (rbConnect.Checked)
+            {
+                ActivateCreateBD();
+            }
+            else
+            {
+                ActivateChooseBD();
+             }
         }
     }
 }
