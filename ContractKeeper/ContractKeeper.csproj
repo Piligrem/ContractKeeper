@@ -113,9 +113,11 @@
     <Compile Include="ContractContext.cs" />
     <Compile Include="DataConnectionConfiguration.cs" />
     <Compile Include="DataSettings.cs" />
+    <Compile Include="DbManagementSQL.cs" />
     <Compile Include="IDatabase.cs" />
     <Compile Include="IDataConnectionConfiguration.cs" />
     <Compile Include="IDbContext.cs" />
+    <Compile Include="IDbManagement.cs" />
     <Compile Include="OdbcWrapper.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="MainForm.cs">

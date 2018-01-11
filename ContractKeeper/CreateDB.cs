@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.Sql;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ContractKeeper
@@ -17,6 +11,24 @@ namespace ContractKeeper
         {
             InitializeComponent();
             cbServerName.DropDown += CbServerName_DropDown;
+            btnCreateBase.Click += btnCreateBase_Click;
+        }
+
+        private void btnCreateBase_Click(object sender, EventArgs e)
+        {
+            IDbManagement dbManager = new DbManagementSQL();
+            var result = dbManager.CreateDatabase(cbServerName.Text, tbBaseName.Text);
+            if (result["result"].Equals("true"))
+            {
+                MessageBox.Show("Database Created Successfully", "Contract keeper",
+                                                  MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show(result["ex"], "MyApp", MessageBoxButtons.OK,
+                   MessageBoxIcon.Information);
+            }
+               
         }
 
         private void CbServerName_DropDown(object sender, EventArgs e)
@@ -46,5 +58,7 @@ namespace ContractKeeper
         {
 
         }
-    }
+
+
+    }    
 }
