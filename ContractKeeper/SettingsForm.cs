@@ -25,7 +25,12 @@ namespace ContractKeeper
         private void BtnCreateDB_Click(object sender, EventArgs e)
         {
             CreateDBForm createDBForm = new CreateDBForm();
-            createDBForm.ShowDialog();
+            var result = createDBForm.ShowDialog();            
+            if (result == DialogResult.OK)
+            {
+                tbConnectionString.Text = createDBForm.ConnectionString;
+                btnSave.Enabled = true;
+            }
         }
 
         private void RbConnect2_Click(object sender, EventArgs e)
@@ -40,12 +45,12 @@ namespace ContractKeeper
 
         private void Settings_Shown(object sender, EventArgs e)
         {
-            DbConnectionString.Text = ContractContext.GetConnectionString();
+            tbConnectionString.Text = ContractContext.GetConnectionString();
         }
 
         private void SetConnectionString_Click(object sender, EventArgs e)
         {
-            DbConnectionString.Text = GetConnectionString();
+            tbConnectionString.Text = GetConnectionString();
         }
 
         private string GetConnectionString()
@@ -69,7 +74,7 @@ namespace ContractKeeper
             {
 
             }
-            connectionStringsSection.ConnectionStrings["DbConnect"].ConnectionString = DbConnectionString.Text;
+            connectionStringsSection.ConnectionStrings["DbConnect"].ConnectionString = tbConnectionString.Text;
             config.Save();
             ConfigurationManager.RefreshSection("connectionStrings");
             Close();
@@ -85,7 +90,7 @@ namespace ContractKeeper
             btnCreateDB.Enabled = true;
 
             btnSave.Enabled = false;
-            DbConnectionString.Enabled = false;
+            tbConnectionString.Enabled = false;
             SetConnectionString.Enabled = false;
         }
 
@@ -94,7 +99,7 @@ namespace ContractKeeper
             btnCreateDB.Enabled = false;
 
             btnSave.Enabled = true;
-            DbConnectionString.Enabled = true;
+            tbConnectionString.Enabled = true;
             SetConnectionString.Enabled = true;
         }
         private void SettingsForm_Load(object sender, EventArgs e)

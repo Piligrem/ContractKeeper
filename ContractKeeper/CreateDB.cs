@@ -7,25 +7,38 @@ namespace ContractKeeper
 {
     public partial class CreateDBForm : Form
     {
+        public string ConnectionString { get; set; }
         public CreateDBForm()
         {
             InitializeComponent();
             cbServerName.DropDown += CbServerName_DropDown;
             btnCreateBase.Click += btnCreateBase_Click;
+            btnClose.Click += btnClose_Click;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void btnCreateBase_Click(object sender, EventArgs e)
         {
-            IDbManagement dbManager = new DbManagementSQL();
-            var result = dbManager.CreateDatabase(cbServerName.Text, tbBaseName.Text);
+            var dbManager        = new DatabaseSQL();
+            dbManager.BaseName   = tbBaseName.Text;
+            dbManager.ServerName = cbServerName.Text;
+
+            var result = dbManager.CreateDatabase();
             if (result["result"].Equals("true"))
             {
                 MessageBox.Show("Database Created Successfully", "Contract keeper",
                                                   MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.ConnectionString = "Data Source =" + cbServerName.Text + "\\SQLEXPRESS; Initial Catalog = " + tbBaseName.Text + "; Integrated Security = True";
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
             else
             {
-                MessageBox.Show(result["ex"], "MyApp", MessageBoxButtons.OK,
+                MessageBox.Show(result["ex"], "Contract keeper", MessageBoxButtons.OK,
                    MessageBoxIcon.Information);
             }
                
@@ -42,8 +55,10 @@ namespace ContractKeeper
             string myServer = Environment.MachineName;
 
             DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
+            
             for (int i = 0; i < servers.Rows.Count; i++)
             {
+                
                 if (myServer == servers.Rows[i]["ServerName"].ToString()) ///// used to get the servers in the local machine////
                 {
                     if ((servers.Rows[i]["InstanceName"] as string) != null)

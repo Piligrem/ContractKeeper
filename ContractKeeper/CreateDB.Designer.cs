@@ -37,6 +37,7 @@
             this.btnCreateBase = new System.Windows.Forms.Button();
             this.lServerName = new System.Windows.Forms.Label();
             this.lDbName = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.contractKeeperDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contractKeeperDataSetBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -73,7 +74,7 @@
             // 
             // btnCreateBase
             // 
-            this.btnCreateBase.Location = new System.Drawing.Point(208, 60);
+            this.btnCreateBase.Location = new System.Drawing.Point(133, 60);
             this.btnCreateBase.Name = "btnCreateBase";
             this.btnCreateBase.Size = new System.Drawing.Size(149, 21);
             this.btnCreateBase.TabIndex = 3;
@@ -98,11 +99,21 @@
             this.lDbName.TabIndex = 5;
             this.lDbName.Text = "Имя базы:";
             // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(288, 60);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(68, 21);
+            this.btnClose.TabIndex = 6;
+            this.btnClose.Text = "Закрыть";
+            this.btnClose.UseVisualStyleBackColor = true;
+            // 
             // CreateDBForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(362, 87);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lDbName);
             this.Controls.Add(this.lServerName);
             this.Controls.Add(this.btnCreateBase);
@@ -128,5 +139,6 @@
         private System.Windows.Forms.Button btnCreateBase;
         private System.Windows.Forms.Label lServerName;
         private System.Windows.Forms.Label lDbName;
+        private System.Windows.Forms.Button btnClose;
     }
 }

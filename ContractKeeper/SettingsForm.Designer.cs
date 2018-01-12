@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
-            this.DbConnectionString = new System.Windows.Forms.TextBox();
+            this.tbConnectionString = new System.Windows.Forms.TextBox();
             this.SetConnectionString = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
@@ -38,15 +38,18 @@
             this.rbConnect2 = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
-            // DbConnectionString
+            // tbConnectionString
             // 
-            this.DbConnectionString.Location = new System.Drawing.Point(13, 87);
-            this.DbConnectionString.Name = "DbConnectionString";
-            this.DbConnectionString.Size = new System.Drawing.Size(259, 20);
-            this.DbConnectionString.TabIndex = 0;
+            this.tbConnectionString.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbConnectionString.Location = new System.Drawing.Point(13, 87);
+            this.tbConnectionString.Name = "tbConnectionString";
+            this.tbConnectionString.Size = new System.Drawing.Size(259, 20);
+            this.tbConnectionString.TabIndex = 0;
             // 
             // SetConnectionString
             // 
+            this.SetConnectionString.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SetConnectionString.Location = new System.Drawing.Point(278, 84);
             this.SetConnectionString.Name = "SetConnectionString";
             this.SetConnectionString.Size = new System.Drawing.Size(27, 23);
@@ -57,6 +60,8 @@
             // 
             // btnSave
             // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Location = new System.Drawing.Point(161, 113);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(69, 23);
@@ -67,6 +72,8 @@
             // 
             // btnClose
             // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.Location = new System.Drawing.Point(236, 113);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(69, 23);
@@ -77,6 +84,7 @@
             // 
             // btnCreateDB
             // 
+            this.btnCreateDB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCreateDB.Location = new System.Drawing.Point(141, 33);
             this.btnCreateDB.Name = "btnCreateDB";
             this.btnCreateDB.Size = new System.Drawing.Size(164, 23);
@@ -119,7 +127,7 @@
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.SetConnectionString);
-            this.Controls.Add(this.DbConnectionString);
+            this.Controls.Add(this.tbConnectionString);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingsForm";
             this.Text = "Настройки";
@@ -132,7 +140,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox DbConnectionString;
+        private System.Windows.Forms.TextBox tbConnectionString;
         private System.Windows.Forms.Button SetConnectionString;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;

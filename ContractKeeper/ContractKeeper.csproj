@@ -95,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
-    <Compile Include="CommonDB.cs" />
+    <Compile Include="DatabaseSQL.cs" />
     <Compile Include="ContractKeeperDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -113,11 +113,9 @@
     <Compile Include="ContractContext.cs" />
     <Compile Include="DataConnectionConfiguration.cs" />
     <Compile Include="DataSettings.cs" />
-    <Compile Include="DbManagementSQL.cs" />
     <Compile Include="IDatabase.cs" />
     <Compile Include="IDataConnectionConfiguration.cs" />
     <Compile Include="IDbContext.cs" />
-    <Compile Include="IDbManagement.cs" />
     <Compile Include="OdbcWrapper.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="MainForm.cs">

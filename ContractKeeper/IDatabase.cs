@@ -8,7 +8,7 @@ namespace ContractKeeper
 {
     public interface IDatabase
     {
-        void CreateDB(string ServerName, string NameDb, string CatalogDb);
+        Dictionary<string, string> CreateDatabase();
 
         void SaveToDatabase();
         void ReadFromDatabase();
